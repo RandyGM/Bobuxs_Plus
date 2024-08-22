@@ -20,6 +20,9 @@
 /* Aplicar la animación a la página */
 body {
     animation: fadeIn 1s ease-in-out;
+    background-color: var(--color1);
+    color: var(--color4);
+    font-family: 'Arial', sans-serif;
 }
 
 /* Estilo del header */
@@ -27,12 +30,22 @@ header {
     padding: 8px;
     top: 0;
     background-color: var(--color1);
+    border-bottom: 2px solid var(--color2);
 }
 
-.container h2, .container p {
+.container h2, .container h3, .container li, .container p {
     margin-top: 16px;
     color: var(--color4);
     text-align: center;
+    list-style-type: none;
+}
+
+.info-container li strong, .info-container h2,.info-container h3 {
+    color: #1FDF64;
+}
+
+hr {
+    color: var(--color4);
 }
 
 /* Otros estilos */
@@ -106,13 +119,13 @@ ul.dropdown-menu {
 
 /* Container general */
 .container {
+    color: var(--color4);
     border-radius: 10px;
     margin: 32px auto;
-    background-color: var(--color1);
+    background-color: var(--color2);
     border: 1px solid var(--color5);
-    justify-content: center;
     max-width: 90%;
-    padding: 16px;
+    padding: 24px;
     box-sizing: border-box;
 }
 
@@ -124,10 +137,10 @@ ul.dropdown-menu {
     padding: 16px;
     max-width: 100%;
     display: flex;
-    flex-direction: row; /* Fila por defecto en pantallas grandes */
-    flex-wrap: nowrap; /* Evitar que las tarjetas se envuelvan en otra línea */
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: 16px;
-    overflow-x: auto; /* Permitir desplazamiento horizontal si las tarjetas no caben en una fila */
+    overflow-x: auto;
 }
 
 .card-down {
@@ -136,12 +149,12 @@ ul.dropdown-menu {
     padding: 4px 32px;
     background-color: var(--color2);
     border-radius: 8px;
-    flex: 0 0 auto; /* Asegurar que las tarjetas mantengan su tamaño */
-    max-width: calc(80% - 32px); /* Ajustar el ancho máximo */
+    flex: 0 0 auto;
+    max-width: calc(80% - 32px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrar el contenido dentro de las tarjetas */
+    align-items: center;
     transition: transform 0.3s;
 }
 
@@ -149,13 +162,18 @@ ul.dropdown-menu {
     transform: translateY(-5px);
 }
 
-/* Ajustar los títulos y párrafos dentro de las tarjetas */
 .card-down h2, .card-down p {
-    text-align: center; /* Centrar el texto dentro de las tarjetas */
+    text-align: center;
 }
 
 .card-down h2 {
     margin-top: 24px;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.card-down p {
+    margin-bottom: 12px;
 }
 
 a.btn {
@@ -165,7 +183,7 @@ a.btn {
     text-decoration: none;
     padding: 8px 16px;
     margin: 16px;
-    display: inline-flex; /* Asegura que el botón y el icono estén alineados */
+    display: inline-flex;
     align-items: center;
 }
 
@@ -177,16 +195,7 @@ a.btn:hover {
 }
 
 a.btn:hover .bi-down {
-    color: var(--color6); /* Cambia el color del icono cuando se pasa el ratón sobre el botón */
-}
-
-.card-down h2 {
-    font-size: 1.5rem;
-    margin-bottom: 12px;
-}
-
-.card-down p {
-    margin-bottom: 12px;
+    color: var(--color6);
 }
 
 .bi-down {
@@ -195,19 +204,37 @@ a.btn:hover .bi-down {
     transition: color 0.3s;
 }
 
+/* Sección de redes sociales */
+.social-media-icons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.social-media-icons a svg {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.social-media-icons a svg:hover {
+    transform: scale(1.1);
+}
+
 /* Sección de tickets */
 .card-ticket {
-    width: 30%; /* Ajustar según sea necesario */
+    width: 30%;
     margin: 16px auto;
     padding: 4px 32px;
     background-color: var(--color2);
     border-radius: 8px;
-    flex: 0 0 auto; /* Asegurar que las tarjetas mantengan su tamaño */
-    max-width: calc(100% - 32px); /* Ajustar el ancho máximo */
+    flex: 0 0 auto;
+    max-width: calc(100% - 32px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrar el contenido dentro de las tarjetas */
+    align-items: center;
     transition: transform 0.3s;
 }
 
@@ -215,9 +242,8 @@ a.btn:hover .bi-down {
     transform: translateY(-5px);
 }
 
-/* Ajustar los títulos y párrafos dentro de las tarjetas de tickets */
 .card-ticket h2, .card-ticket p {
-    text-align: center; /* Centrar el texto dentro de las tarjetas */
+    text-align: center;
 }
 
 .card-ticket h2 {
@@ -232,12 +258,12 @@ a.btn:hover .bi-down {
 .card-bobux {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around; /* Espaciado uniforme entre los elementos */
+    justify-content: space-around;
     padding: 16px;
 }
 
 .package {
-    width: 30%; /* Ajustar según sea necesario */
+    width: 30%;
     margin: 16px;
     padding: 16px;
     background-color: var(--color2);
@@ -245,7 +271,7 @@ a.btn:hover .bi-down {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrar contenido dentro del paquete */
+    align-items: center;
     transition: transform 0.3s;
 }
 
@@ -297,9 +323,8 @@ img.img-arqui {
     margin: 32px auto;
     background-color: var(--color1);
     border: 1px solid var(--color5);
-    justify-content: center;
-    width: 60%; /* Ajustado a un ancho más adecuado */
-    max-width: 500px; /* Establecido un ancho máximo */
+    width: 60%;
+    max-width: 500px;
     padding: 16px;
     box-sizing: border-box;
 }
@@ -334,9 +359,8 @@ button.btn-submit {
     color: var(--color4);
     text-decoration: none;
     padding: 10px 20px;
-    display: inline-flex; /* Asegura que el botón y el icono estén alineados */
-    margin: 8px auto;
-    justify-content: center; /* Centrar horizontalmente el botón */
+    display: inline-flex;
+    justify-content: center;
     width: 100%;
 }
 
@@ -353,12 +377,12 @@ button.btn-submit:disabled {
 /* Media Query para dispositivos pequeños */
 @media only screen and (max-width: 540px) {
     .card-bobux {
-        flex-direction: column; /* Cambia la disposición de las tarjetas a vertical */
+        flex-direction: column;
     }
 
     .package {
-        width: 80%; /* Ajusta el ancho al 100% para pantallas pequeñas */
-        margin: 16px auto; /* Centrar las tarjetas verticales */
+        width: 80%;
+        margin: 16px auto;
     }
 
     .card-down {
@@ -369,16 +393,6 @@ button.btn-submit:disabled {
 
     .container-user {
         width: 90%;
-        max-width: 100%;
-    }
-
-    .card-container {
-        flex-direction: column; /* Cambia la disposición de las tarjetas a vertical */
-    }
-
-    .card-ticket {
-        width: 80%; /* Ajusta el ancho al 80% para pantallas pequeñas */
-        margin: 16px auto; /* Centrar las tarjetas verticales */
-        max-width: 100%; /* Asegura que no excedan el ancho de la pantalla */
+        padding: 16px;
     }
 }
