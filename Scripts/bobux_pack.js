@@ -45,7 +45,7 @@ function generatePackages() {
             <h2>${pkg.title}</h2>
             <p><span> - ${pkg.robux} Get Bobux -</span></p>
             <p>Price ${pkg.price} Tickets</p>
-            <a href="#" class="btn" data-price="${pkg.price}">Buy Bobux</a>
+            <a href="#" class="btn" data-price="${pkg.price}" data-title="${pkg.title}" data-robux="${pkg.robux}" data-bs-toggle="modal" data-bs-target="#purchaseModal">Buy Bobux</a>
         `;
 
         container.appendChild(packageDiv);
@@ -56,15 +56,42 @@ function generatePackages() {
     buyButtons.forEach(button => {
         button.addEventListener('click', function(event) {
             event.preventDefault();
-            const price = parseInt(this.getAttribute('data-price'));
-            const confirmPurchase = confirm(`Are you sure you want to spend ${price} tickets to buy this package?`);
 
-            if (confirmPurchase) {
-                handlePurchase(price);
+            // Obtener datos del paquete
+            const title = this.getAttribute('data-title');
+            const price = parseInt(this.getAttribute('data-price'));
+            const robux = this.getAttribute('data-robux');
+
+            // Verificar si hay suficientes tickets
+            let ticketCount = parseInt(localStorage.getItem('ticketCount')) || 0;
+
+            // Actualizar contenido del modal
+            document.getElementById('modal-package-title').textContent = `Package: ${title}`;
+            document.getElementById('modal-package-price').textContent = `Price: ${price} Tickets`;
+            document.getElementById('modal-package-robux').textContent = `You will receive: ${robux} Bobux`;
+
+            const insufficientTicketsElement = document.getElementById('modal-insufficient-tickets');
+            const confirmBtn = document.getElementById('confirm-purchase-btn');
+
+            if (ticketCount >= price) {
+                insufficientTicketsElement.style.display = 'none';
+                confirmBtn.disabled = false; // Habilitar el botón de confirmación si hay suficientes tickets
             } else {
-                alert('Purchase canceled.');
+                insufficientTicketsElement.style.display = 'block';
+                confirmBtn.disabled = true; // Deshabilitar el botón de confirmación si no hay suficientes tickets
             }
+
+            confirmBtn.setAttribute('data-price', price);
         });
+    });
+
+    // Añadir evento de confirmación de compra al botón en el modal
+    document.getElementById('confirm-purchase-btn').addEventListener('click', function() {
+        const price = parseInt(this.getAttribute('data-price'));
+        handlePurchase(price);
+        const modalElement = document.getElementById('purchaseModal');
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        modal.hide(); // Ocultar el modal después de la compra
     });
 }
 
@@ -81,10 +108,6 @@ function handlePurchase(price) {
 
         // Guardar los tickets actualizados en la base de datos
         saveTicketsToDatabase(ticketCount);
-
-        alert('Purchase successful!');
-    } else {
-        alert('Not enough tickets to complete the purchase.');
     }
 }
 
@@ -106,4 +129,3 @@ async function saveTicketsToDatabase(ticketCount) {
 
 // Llamar a la función para generar los paquetes cuando se cargue la página
 document.addEventListener('DOMContentLoaded', generatePackages);
-
