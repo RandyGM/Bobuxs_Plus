@@ -374,6 +374,18 @@ button.btn-submit:disabled {
     cursor: not-allowed;
 }
 
+/* Centrar el Modal en la Pantalla */
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Asegura que el modal se centre verticalmente */
+}
+
+.modal-content {
+    margin: auto; /* Asegura que el modal se centre horizontalmente */
+}
+
 /* Media Query para dispositivos pequeños */
 @media only screen and (max-width: 540px) {
     .card-bobux {
